@@ -1,27 +1,49 @@
-# ProjectGutenbergFe
+# Project Gutenberg - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+This is the **frontend** for the Book Analysis project (Project Gutenberg). It provides a user-friendly interface to search books, view analysis results, and manage history.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+✅ Search for books by ID  
+✅ Display book details and full content  
+✅ View AI-generated text analysis (summary, key characters, themes, etc.)  
+✅ Track search history (toggle side panel)  
+✅ Responsive UI with modern styling
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Installation Guide
 
-## Build
+### **Clone the Repository**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+git clone https://github.com/OthLah001/project-gutenberg-fe.git
+cd project-gutenberg-fe
+```
 
-## Running unit tests
+### **Install Node.js & Yarn**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Make sure you have:
 
-## Running end-to-end tests
+- **Node.js** (version 16 or later) → [Download Here](https://nodejs.org/)
+- **Yarn** (package manager) → Install via:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm install -g yarn
+```
 
-## Further help
+### **Install Dependencies**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+yarn install
+```
+
+### **Run the Development Server**
+
+```bash
+yarn start
+```
+
+The frontend will be available at **`http://localhost:4200/`**.
+
+---
