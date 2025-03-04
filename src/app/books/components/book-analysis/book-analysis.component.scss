@@ -1,0 +1,28 @@
+.book-analysis-wrapper {
+  padding: 4px;
+  border-radius: 4px;
+  background: linear-gradient(
+    84.96deg,
+    #0880ea -27.06%,
+    #8920fe 33.01%,
+    #e93d82 81.07%,
+    #e93dc3 100.15%,
+    #c62ab6 114.28%
+  );
+
+  .book-analysis {
+    padding: 1rem 2rem;
+    background: white;
+  }
+
+  .analysis-title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .analysis-content {
+    font-size: 16px;
+    font-weight: 400;
+    color: #00000099;
+  }
+}

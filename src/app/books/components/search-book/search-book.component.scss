@@ -1,0 +1,45 @@
+.header-container {
+  height: 250px;
+  background-color: #f1f5f9;
+  margin: 0px !important;
+
+  .header-title {
+    font-family: "TWK Everett";
+    font-size: 20px;
+    font-weight: 750;
+  }
+}
+
+.book-container {
+  margin: -50px auto 0 auto;
+}
+
+.book-img-actions {
+  .book-image img {
+    width: 186px;
+    height: 284px;
+    box-shadow: 5px 5px #b2c0cd;
+  }
+
+  .btn {
+    width: 191px;
+    font-weight: 600;
+
+    &:last-child {
+      background: linear-gradient(
+        84.96deg,
+        #0880ea -27.06%,
+        #8920fe 33.01%,
+        #e93d82 81.07%,
+        #e93dc3 100.15%,
+        #c62ab6 114.28%
+      );
+    }
+  }
+}
+
+.book-details .book-title {
+  font-family: "Inria Serif";
+  font-size: 30px;
+  font-weight: 700;
+}

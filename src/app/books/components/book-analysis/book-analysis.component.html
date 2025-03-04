@@ -1,0 +1,52 @@
+<div class="book-analysis-wrapper mb-5">
+  <div class="book-analysis">
+    <div class="analysis-section">
+      <p class="analysis-title">Summary</p>
+      <p class="analysis-content">{{ analysis?.summary }}</p>
+    </div>
+
+    <div class="analysis-section">
+      <p class="analysis-title">Key Characters & Roles</p>
+      <ul class="analysis-content">
+        <li *ngFor="let cRole of analysis?.key_characters">
+          {{ cRole.name }}: {{ cRole.role }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="analysis-section">
+      <p class="analysis-title">Character Relationships</p>
+      <ul class="analysis-content">
+        <li *ngFor="let cRelation of analysis?.character_relationships">
+          {{ cRelation }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="analysis-section">
+      <p class="analysis-title">Emotion</p>
+      <p class="analysis-content">{{ analysis?.sentiment_and_emotion }}</p>
+    </div>
+
+    <div class="analysis-section">
+      <p class="analysis-title">Themes</p>
+      <ul class="analysis-content">
+        <li *ngFor="let theme of analysis?.themes">{{ theme }}</li>
+      </ul>
+    </div>
+
+    <div class="analysis-section">
+      <p class="analysis-title">Topics</p>
+      <ul class="analysis-content">
+        <li *ngFor="let topic of analysis?.topics">{{ topic }}</li>
+      </ul>
+    </div>
+
+    <div class="analysis-section">
+      <p class="analysis-title">Notable Quotes</p>
+      <ul class="analysis-content">
+        <li *ngFor="let quote of analysis?.notable_quotes">{{ quote }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="book-metadata mb-5">
+  <p class="about-title">About this book</p>
+
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td>Authors</td>
+        <td>
+          <ul>
+            <li *ngFor="let author of metadata?.authors">{{ author }}</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Language</td>
+        <td class="pdl-2">{{ metadata?.language }}</td>
+      </tr>
+      <tr>
+        <td>Subjects</td>
+        <td>
+          <ul>
+            <li *ngFor="let subject of metadata?.subjects">{{ subject }}</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>LoC Classification</td>
+        <td class="pdl-2">{{ metadata?.locc }}</td>
+      </tr>
+      <tr>
+        <td>Release Date</td>
+        <td class="pdl-2">{{ metadata?.issued_date }}</td>
+      </tr>
+      <tr>
+        <td>Bookshelves</td>
+        <td>
+          <ul>
+            <li *ngFor="let bookshelve of metadata?.bookshelves">
+              {{ bookshelve }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

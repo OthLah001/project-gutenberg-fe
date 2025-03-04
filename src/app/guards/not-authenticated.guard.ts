@@ -23,7 +23,7 @@ export class NotAuthenticatedGuard implements CanActivate {
     const token = this.localStorageService.getItem('bearer_token');
 
     if (token && token.length > 0) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/books']);
       return false;
     }
     return true;

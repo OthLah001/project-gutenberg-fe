@@ -1,0 +1,26 @@
+.book-metadata {
+  .about-title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  tr {
+    td {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    td:first-child {
+      width: 200px;
+      padding-left: 2rem;
+    }
+
+    td:last-child {
+      font-weight: 600;
+    }
+
+    td.pdl-2 {
+      padding-left: 2rem !important;
+    }
+  }
+}

@@ -35,7 +35,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss",
               "node_modules/flatpickr/dist/flatpickr.css",
@@ -111,7 +111,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "src/assets/css/bootstrap.min.css",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss",

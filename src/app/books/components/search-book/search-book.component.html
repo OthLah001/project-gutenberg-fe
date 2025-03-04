@@ -1,0 +1,95 @@
+<section class="book-section w-100">
+  <div class="header-container w-100 row justify-content-around pt-3">
+    <div class="col-4">
+      <h1 class="header-title">Project Gutenberg</h1>
+    </div>
+
+    <div class="search-container col-4">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Book ID"
+        aria-label="Book ID"
+        aria-describedby="basic-addon2"
+        [(ngModel)]="inputGutenbergId"
+        (keydown)="$event.key == 'Enter' ? onSearchBook() : ''"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="w-100 d-flex justify-content-center mt-5 mb-5">
+    <div
+      class="spinner-border"
+      style="width: 4rem; height: 4rem"
+      role="status"
+    ></div>
+  </div>
+
+  <div
+    *ngIf="metadata != null"
+    class="book-container row justify-content-around w-75"
+  >
+    <div class="book-img-actions col-2">
+      <div class="book-image mb-3">
+        <img
+          [src]="
+            'https://www.gutenberg.org/cache/epub/' +
+            gutenbergId +
+            '/pg' +
+            gutenbergId +
+            '.cover.medium.jpg'
+          "
+          alt="Book Cover"
+        />
+      </div>
+
+      <div class="book-buttons d-flex flex-column">
+        <button
+          class="btn btn-primary mb-2"
+          (click)="!isLoadingContent && onReadBook()"
+        >
+          <span
+            *ngIf="isLoadingContent"
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Read the eBook
+        </button>
+        <button
+          class="btn btn-primary"
+          (click)="!isLoadingAnalysis && onAnalyzeBook()"
+        >
+          <span
+            *ngIf="isLoadingAnalysis"
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Analyze
+        </button>
+      </div>
+    </div>
+
+    <div class="book-details col-9">
+      <h2 class="book-title mb-5">{{ metadata.title }}</h2>
+
+      <ng-container *ngIf="!showBookContent">
+        <app-book-analysis
+          *ngIf="!readBook && analysis != null"
+          [analysis]="analysis"
+        ></app-book-analysis>
+
+        <app-book-metadata
+          *ngIf="!readBook && metadata != null"
+          [metadata]="metadata"
+        ></app-book-metadata>
+      </ng-container>
+
+      <app-book-content
+        *ngIf="content != null && showBookContent"
+        [content]="content"
+      ></app-book-content>
+    </div>
+  </div>
+</section>
