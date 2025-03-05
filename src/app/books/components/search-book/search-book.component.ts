@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs';
 import { BookContentComponent } from '../book-content/book-content.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-search-book',
@@ -21,12 +23,14 @@ import { BookContentComponent } from '../book-content/book-content.component';
     FormsModule,
     CommonModule,
     BookContentComponent,
+    MatSidenavModule,
   ],
   templateUrl: './search-book.component.html',
   styleUrl: './search-book.component.scss',
 })
 export class SearchBookComponent implements OnInit {
   public gutenbergId: number | null = null;
+  public openedSidenav: boolean = false;
 
   public inputGutenbergId: number | null = null;
   public readBook: boolean = false;
@@ -44,9 +48,14 @@ export class SearchBookComponent implements OnInit {
   constructor(private booksService: BooksService) {}
 
   ngOnInit(): void {
-    // this.booksService.getSearchHistory().subscribe((history) => {
-    //   this.history = history;
-    // });
+    this.booksService.getSearchHistory().subscribe((history) => {
+      this.history = history;
+    });
+  }
+
+  onCheckHistory(gutenbergId: number): void {
+    this.inputGutenbergId = gutenbergId;
+    this.onSearchBook();
   }
 
   onSearchBook(): void {
