@@ -48,6 +48,10 @@ export class SearchBookComponent implements OnInit {
   constructor(private booksService: BooksService) {}
 
   ngOnInit(): void {
+    this.onGetSearchHistory();
+  }
+
+  onGetSearchHistory(): void {
     this.booksService.getSearchHistory().subscribe((history) => {
       this.history = history;
     });
@@ -70,6 +74,7 @@ export class SearchBookComponent implements OnInit {
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe((metadataResp) => {
         this.metadata = metadataResp;
+        this.onGetSearchHistory();
       });
   }
 
