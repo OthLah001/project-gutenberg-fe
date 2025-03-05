@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "heroku-postbuild": "ng build"
   },
   "private": true,
   "dependencies": {
@@ -30,7 +31,9 @@
     "ngx-owl-carousel-o": "^18.0.0",
     "ngx-lightbox": "^3.0.0",
     "@angular/material": "18.1.3",
-    "@angular/cdk": "18.1.3"
+    "@angular/cdk": "18.1.3",
+    "express": "^4.19.2",
+    "typescript": "~5.5.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.1.1",
@@ -44,5 +47,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.5.2"
+  },
+  "engines": {
+    "node": "20.15.1",
+    "yarn": "1.22.22"
   }
 }
