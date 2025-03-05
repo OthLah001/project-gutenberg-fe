@@ -6,7 +6,7 @@
 
     <div class="search-container col-4">
       <input
-        type="text"
+        type="number"
         class="form-control"
         placeholder="Book ID"
         aria-label="Book ID"
@@ -27,9 +27,11 @@
 
   <div
     *ngIf="metadata != null"
-    class="book-container row justify-content-around w-75"
+    class="book-container d-flex flex-lg-row flex-column justify-content-lg-around justify-content-center w-lg-75 w-100"
   >
-    <div class="book-img-actions col-2">
+    <div
+      class="book-img-actions col-lg-2 d-flex flex-column align-items-center"
+    >
       <div class="book-image mb-3">
         <img
           [src]="
@@ -71,8 +73,10 @@
       </div>
     </div>
 
-    <div class="book-details col-9">
-      <h2 class="book-title mb-5">{{ metadata.title }}</h2>
+    <div class="book-details col-lg-9 me-3 ms-3">
+      <h2 class="book-title mb-5 mt-5 mt-lg-0 text-center text-lg-start">
+        {{ metadata.title }}
+      </h2>
 
       <ng-container *ngIf="!showBookContent">
         <app-book-analysis
