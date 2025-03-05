@@ -96,12 +96,19 @@ export class SearchBookComponent implements OnInit {
 
     this.isLoadingAnalysis = true;
     this.showBookContent = false;
-    this.booksService
-      .getBookAnalysis(this.gutenbergId)
-      .pipe(finalize(() => (this.isLoadingAnalysis = false)))
-      .subscribe((analysisResp) => {
-        this.analysis = analysisResp;
-      });
+
+    const intervalId = setInterval(() => {
+      this.booksService
+        .getBookAnalysis(this.gutenbergId as number)
+        .subscribe((analysisResp) => {
+          if (analysisResp.status === 'completed') {
+            // If the status is no longer 202, stop polling
+            clearInterval(intervalId);
+            this.analysis = analysisResp;
+            this.isLoadingAnalysis = false;
+          }
+        });
+    }, 3000); // Poll every 3 seconds
   }
 
   resetData(): void {

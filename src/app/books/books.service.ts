@@ -17,7 +17,7 @@ export class BooksService {
     return this.http.get<{ content: string }>(`books/${gutenberg_id}/content/`);
   }
 
-  getBookAnalysis(gutenberg_id: number): Observable<IBookAnalysis> {
+  getBookAnalysis(gutenberg_id: number): Observable<IBookAnalysis | any> {
     return this.http.get<IBookAnalysis>(`books/${gutenberg_id}/analysis/`);
   }
 
