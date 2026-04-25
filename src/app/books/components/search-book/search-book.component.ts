@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BooksService } from '../../books.service';
 import {
   IBookAnalysis,
@@ -29,6 +29,8 @@ import { CdkScrollableModule } from '@angular/cdk/scrolling';
   styleUrl: './search-book.component.scss',
 })
 export class SearchBookComponent implements OnInit {
+  @ViewChild('bookDetailsContainer') private bookDetailsContainer?: ElementRef<HTMLDivElement>;
+
   public gutenbergId: number | null = null;
   public openedSidenav: boolean = false;
 
@@ -44,6 +46,7 @@ export class SearchBookComponent implements OnInit {
   public isLoadingContent: boolean = false;
   public isLoadingAnalysis: boolean = false;
   public showBookContent: boolean = false;
+  public isCoverImageLoaded: boolean = false;
 
   constructor(private booksService: BooksService) {}
 
@@ -68,6 +71,7 @@ export class SearchBookComponent implements OnInit {
     this.resetData();
     this.gutenbergId = this.inputGutenbergId;
     this.isLoading = true;
+    this.isCoverImageLoaded = false;
 
     this.booksService
       .getBookMetadata(this.gutenbergId)
@@ -88,6 +92,7 @@ export class SearchBookComponent implements OnInit {
       .subscribe((contentResp) => {
         this.content = contentResp.content;
         this.showBookContent = true;
+        this.scrollToContentStart();
       });
   }
 
@@ -116,5 +121,22 @@ export class SearchBookComponent implements OnInit {
     this.metadata = null;
     this.analysis = null;
     this.showBookContent = false;
+  }
+
+  private scrollToContentStart(): void {
+    setTimeout(() => {
+      this.bookDetailsContainer?.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    });
+  }
+
+  onCoverImageLoaded(): void {
+    this.isCoverImageLoaded = true;
+  }
+
+  onCoverImageError(): void {
+    this.isCoverImageLoaded = true;
   }
 }
