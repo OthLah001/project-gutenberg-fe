@@ -7,12 +7,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
+  styleUrls: ['../auth-page.scss'],
 })
 export class SignupComponent implements OnInit {
   public signupForm!: UntypedFormGroup;
   public registring: boolean = false;
   public registraionError: boolean = false;
   public errorMessage: string = 'An error occured. Please try again!';
+  public showPassword = false;
 
   constructor(
     private formBuilder: FormBuilder,

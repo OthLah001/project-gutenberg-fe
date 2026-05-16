@@ -14,8 +14,16 @@ export const routes: Routes = [
   {
     path: 'books',
     loadComponent: () =>
-      import('./books/components/search-book/search-book.component').then(
-        (m) => m.SearchBookComponent
+      import('./books/components/home-search/home-search.component').then(
+        (m) => m.HomeSearchComponent
+      ),
+    canActivate: [AuthenticatedGuard],
+  },
+  {
+    path: 'books/view',
+    loadComponent: () =>
+      import('./books/components/book-view/book-view.component').then(
+        (m) => m.BookViewComponent
       ),
     canActivate: [AuthenticatedGuard],
   },

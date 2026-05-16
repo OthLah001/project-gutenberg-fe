@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../../books.service';
 import {
   IBookAnalysis,
@@ -48,10 +49,21 @@ export class SearchBookComponent implements OnInit {
   public showBookContent: boolean = false;
   public isCoverImageLoaded: boolean = false;
 
-  constructor(private booksService: BooksService) {}
+  constructor(
+    private booksService: BooksService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.onGetSearchHistory();
+
+    const idParam = this.route.snapshot.queryParamMap.get('id');
+    if (idParam) {
+      this.inputGutenbergId = Number(idParam);
+      if (this.inputGutenbergId) {
+        this.onSearchBook();
+      }
+    }
   }
 
   onGetSearchHistory(): void {

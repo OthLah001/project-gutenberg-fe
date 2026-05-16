@@ -1,0 +1,68 @@
+<div class="home-search">
+  <header class="home-search__header">
+    <h1 class="home-search__brand">Gutenberg Library</h1>
+    <div class="home-search__avatar" aria-hidden="true">
+      <span class="material-symbols-outlined">person</span>
+    </div>
+  </header>
+
+  <main class="home-search__main">
+    <section class="home-search__discover">
+      <h2 class="home-search__title">Discover</h2>
+      <div class="home-search__search">
+        <span class="material-symbols-outlined home-search__search-icon">search</span>
+        <input
+          type="text"
+          inputmode="numeric"
+          class="home-search__search-input"
+          placeholder="Search by Book ID"
+          autocomplete="off"
+          [(ngModel)]="bookIdInput"
+          (keydown.enter)="onSearch()"
+        />
+      </div>
+    </section>
+
+    <section class="home-search__history">
+      <div class="home-search__section-head">
+        <h3 class="home-search__section-title">Recent History</h3>
+      </div>
+
+      @if (history.length === 0) {
+        <p class="home-search__empty">Your recent searches will appear here.</p>
+      } @else {
+        <div class="home-search__cards">
+          @for (item of history; track item.gutenberg_id) {
+            <button
+              type="button"
+              class="home-search__card"
+              (click)="onHistorySelect(item.gutenberg_id)"
+            >
+              <div class="home-search__card-cover">
+                @if (!isCoverLoaded(item.gutenberg_id)) {
+                  <div class="home-search__card-cover-skeleton" aria-hidden="true"></div>
+                }
+                <img
+                  [src]="coverUrl(item.gutenberg_id)"
+                  [alt]="item.title + ' cover'"
+                  loading="lazy"
+                  [class.is-loaded]="isCoverLoaded(item.gutenberg_id)"
+                  (load)="onCoverLoaded(item.gutenberg_id)"
+                  (error)="onCoverError(item.gutenberg_id)"
+                />
+              </div>
+              <div class="home-search__card-body">
+                <h4 class="home-search__card-title">{{ item.title }}</h4>
+                <p class="home-search__card-meta">{{ item.author }}</p>
+                <div class="home-search__card-time">
+                  <span class="material-symbols-outlined">schedule</span>
+                  <span>{{ formatRelativeTime(item.searched_at) }}</span>
+                </div>
+              </div>
+            </button>
+          }
+        </div>
+      }
+    </section>
+  </main>
+</div>

@@ -1,0 +1,156 @@
+<div class="book-view">
+  <nav class="book-view__nav">
+    <div class="book-view__nav-start">
+      <a routerLink="/books" class="book-view__back" aria-label="Back to search">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <span class="book-view__brand">Gutenberg Library</span>
+    </div>
+    <div class="book-view__nav-actions" aria-hidden="true">
+      <span class="material-symbols-outlined">share</span>
+      <span class="material-symbols-outlined">bookmark</span>
+      <div class="book-view__avatar">
+        <span class="material-symbols-outlined">person</span>
+      </div>
+    </div>
+  </nav>
+
+  @if (isLoadingMetadata) {
+    <div class="book-view__loading" aria-live="polite">
+      <div class="book-view__spinner" role="status" aria-label="Loading book"></div>
+    </div>
+  } @else if (metadata) {
+    <main class="book-view__main">
+      @if (viewMode === 'details') {
+        <section class="book-view__hero">
+          <div class="book-view__cover-wrap">
+            <div class="book-view__cover">
+              @if (!isCoverLoaded) {
+                <div class="book-view__cover-skeleton" aria-hidden="true"></div>
+              }
+              <img
+                [src]="coverUrl()"
+                [alt]="metadata.title + ' cover'"
+                [class.is-loaded]="isCoverLoaded"
+                (load)="onCoverLoaded()"
+                (error)="onCoverError()"
+              />
+            </div>
+          </div>
+
+          <div class="book-view__hero-copy">
+            <h1 class="book-view__title">{{ metadata.title }}</h1>
+            <p class="book-view__author">{{ authorLine() }}</p>
+
+            <div class="book-view__meta-row">
+              <span class="book-view__meta-pill">{{ metadata.language || '—' }}</span>
+            </div>
+
+            @if (heroDescription()) {
+              <p class="book-view__description">{{ heroDescription() }}</p>
+            }
+          </div>
+        </section>
+
+        <section class="book-view__about">
+          <h2 class="book-view__about-title">About the book</h2>
+          <div class="book-view__about-grid">
+            <div class="book-view__field">
+              <span class="book-view__field-label">Authors</span>
+              <p class="book-view__field-value">{{ metadataValue(metadata.authors) }}</p>
+            </div>
+            <div class="book-view__field">
+              <span class="book-view__field-label">Language</span>
+              <p class="book-view__field-value">{{ metadata.language || '—' }}</p>
+            </div>
+            <div class="book-view__field">
+              <span class="book-view__field-label">Subjects</span>
+              <p class="book-view__field-value">{{ metadataValue(metadata.subjects) }}</p>
+            </div>
+            <div class="book-view__field">
+              <span class="book-view__field-label">LoC Classification</span>
+              <p class="book-view__field-value">{{ metadata.locc || '—' }}</p>
+            </div>
+            <div class="book-view__field">
+              <span class="book-view__field-label">Release Date</span>
+              <p class="book-view__field-value">{{ metadata.issued_date || '—' }}</p>
+            </div>
+            <div class="book-view__field">
+              <span class="book-view__field-label">Bookshelves</span>
+              <p class="book-view__field-value">{{ metadataValue(metadata.bookshelves) }}</p>
+            </div>
+          </div>
+        </section>
+      }
+
+      @if (viewMode === 'content' && content) {
+        <section class="book-view__content">
+          <button type="button" class="book-view__content-back" (click)="onShowDetails()">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to details
+          </button>
+          <app-book-content [content]="content"></app-book-content>
+        </section>
+      }
+
+      @if (viewMode === 'analysis') {
+        <section class="book-view__analysis">
+          <button type="button" class="book-view__content-back" (click)="onShowDetails()">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to details
+          </button>
+
+          @if (isLoadingAnalysis && !analysis) {
+            <div class="book-view__loading book-view__loading--inline">
+              <div class="book-view__spinner" role="status" aria-label="Analyzing book"></div>
+              <p class="book-view__loading-text">Analysis in progress…</p>
+            </div>
+          } @else if (analysis) {
+            <app-book-analysis
+              [analysis]="analysis"
+              [title]="metadata.title"
+              [authors]="metadata.authors"
+              [issuedDate]="metadata.issued_date"
+              [gutenbergId]="gutenbergId"
+            ></app-book-analysis>
+          } @else {
+            <p class="book-view__loading-text">Analysis could not be loaded. Try again shortly.</p>
+          }
+        </section>
+      }
+    </main>
+
+    <footer class="book-view__actions">
+      <div class="book-view__actions-inner">
+        <button
+          type="button"
+          class="book-view__btn book-view__btn--primary"
+          [class.is-active]="isReadActive()"
+          [disabled]="isLoadingContent"
+          (click)="onReadBook()"
+        >
+          @if (isLoadingContent) {
+            <span class="book-view__btn-spinner" aria-hidden="true"></span>
+          } @else {
+            <span class="material-symbols-outlined">menu_book</span>
+          }
+          Read the book
+        </button>
+        <button
+          type="button"
+          class="book-view__btn book-view__btn--secondary"
+          [class.is-active]="isAnalyzeActive()"
+          [disabled]="isLoadingAnalysis && !analysis"
+          (click)="onAnalyzeBook()"
+        >
+          @if (isLoadingAnalysis && !analysis) {
+            <span class="book-view__btn-spinner" aria-hidden="true"></span>
+          } @else {
+            <span class="material-symbols-outlined">psychology</span>
+          }
+          Analyze
+        </button>
+      </div>
+    </footer>
+  }
+</div>

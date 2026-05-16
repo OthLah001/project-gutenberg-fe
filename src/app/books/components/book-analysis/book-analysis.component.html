@@ -1,52 +1,96 @@
-<div class="book-analysis-wrapper mb-5 mr-3 ml-3 mr-lg-0 ml-lg-0">
-  <div class="book-analysis">
-    <div class="analysis-section">
-      <p class="analysis-title">Summary</p>
-      <p class="analysis-content">{{ analysis?.summary }}</p>
-    </div>
+@if (analysis) {
+  <article class="book-analysis">
+    @if (title) {
+      <section class="book-analysis__hero">
+        @if (coverUrl()) {
+          <div class="book-analysis__cover-wrap">
+            <img
+              class="book-analysis__cover"
+              [src]="coverUrl()"
+              [alt]="title + ' cover'"
+              (error)="onCoverError()"
+            />
+          </div>
+        }
+        <div class="book-analysis__hero-copy">
+          <h2 class="book-analysis__title">{{ title }}</h2>
+          @if (metadataLine()) {
+            <p class="book-analysis__meta">{{ metadataLine() }}</p>
+          }
+          @if (analysis.summary) {
+            <div class="book-analysis__summary-block">
+              <h3 class="book-analysis__label">Summary</h3>
+              <p class="book-analysis__summary">{{ analysis.summary }}</p>
+            </div>
+          }
+        </div>
+      </section>
+    } @else if (analysis.summary) {
+      <section class="book-analysis__intro">
+        <h3 class="book-analysis__label">Summary</h3>
+        <p class="book-analysis__summary">{{ analysis.summary }}</p>
+      </section>
+    }
 
-    <div class="analysis-section">
-      <p class="analysis-title">Key Characters & Roles</p>
-      <ul class="analysis-content">
-        <li *ngFor="let cRole of analysis?.key_characters">
-          {{ cRole.name }}: {{ cRole.role }}
-        </li>
-      </ul>
-    </div>
+    <section class="book-analysis__grid">
+      @if (analysis.character_relationships.length) {
+        <div class="book-analysis__card book-analysis__card--relationships">
+          <h3 class="book-analysis__card-title">Character Relationships</h3>
+          <ul class="book-analysis__relationships">
+            @for (relation of analysis.character_relationships; track relation) {
+              <li class="book-analysis__relationship">
+                <span class="material-symbols-outlined" aria-hidden="true">link</span>
+                <p>{{ relation }}</p>
+              </li>
+            }
+          </ul>
+        </div>
+      }
 
-    <div class="analysis-section">
-      <p class="analysis-title">Character Relationships</p>
-      <ul class="analysis-content">
-        <li *ngFor="let cRelation of analysis?.character_relationships">
-          {{ cRelation }}
-        </li>
-      </ul>
-    </div>
+      @if (analysis.sentiment_and_emotion) {
+        <div class="book-analysis__card book-analysis__card--sentiment">
+          <h3 class="book-analysis__card-title">Sentiment Flow</h3>
+          <p class="book-analysis__sentiment-quote">{{ analysis.sentiment_and_emotion }}</p>
+        </div>
+      }
 
-    <div class="analysis-section">
-      <p class="analysis-title">Emotion</p>
-      <p class="analysis-content">{{ analysis?.sentiment_and_emotion }}</p>
-    </div>
+      @if (themeTags().length) {
+        <div class="book-analysis__card book-analysis__card--themes">
+          <h3 class="book-analysis__card-title">Core Themes</h3>
+          <div class="book-analysis__tags">
+            @for (tag of themeTags(); track tag) {
+              <span class="book-analysis__tag">{{ tag }}</span>
+            }
+          </div>
+        </div>
+      }
 
-    <div class="analysis-section">
-      <p class="analysis-title">Themes</p>
-      <ul class="analysis-content">
-        <li *ngFor="let theme of analysis?.themes">{{ theme }}</li>
-      </ul>
-    </div>
+      @if (analysis.notable_quotes.length) {
+        <div class="book-analysis__card book-analysis__card--quotes">
+          <h3 class="book-analysis__card-title">Notable Quotes</h3>
+          <div class="book-analysis__quotes">
+            @for (quote of analysis.notable_quotes; track quote) {
+              <blockquote class="book-analysis__quote">
+                <p>{{ quote }}</p>
+              </blockquote>
+            }
+          </div>
+        </div>
+      }
+    </section>
 
-    <div class="analysis-section">
-      <p class="analysis-title">Topics</p>
-      <ul class="analysis-content">
-        <li *ngFor="let topic of analysis?.topics">{{ topic }}</li>
-      </ul>
-    </div>
-
-    <div class="analysis-section">
-      <p class="analysis-title">Notable Quotes</p>
-      <ul class="analysis-content">
-        <li *ngFor="let quote of analysis?.notable_quotes">{{ quote }}</li>
-      </ul>
-    </div>
-  </div>
-</div>
+    @if (analysis.key_characters.length) {
+      <section class="book-analysis__characters">
+        <h3 class="book-analysis__section-title">Key Characters &amp; Roles</h3>
+        <div class="book-analysis__character-grid">
+          @for (character of analysis.key_characters; track character.name) {
+            <div class="book-analysis__character">
+              <h4 class="book-analysis__character-name">{{ character.name }}</h4>
+              <p class="book-analysis__character-role">{{ character.role }}</p>
+            </div>
+          }
+        </div>
+      </section>
+    }
+  </article>
+}

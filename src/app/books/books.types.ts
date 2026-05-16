@@ -21,5 +21,6 @@ export interface IBookAnalysis {
 export interface ISearchHistory {
   title: string;
   gutenberg_id: number;
-  search_at: string;
+  author: string;
+  searched_at: string;
 }

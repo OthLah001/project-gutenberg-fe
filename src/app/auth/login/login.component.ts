@@ -7,12 +7,14 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrls: ['../auth-page.scss'],
 })
 export class LoginComponent implements OnInit {
   public loginForm!: UntypedFormGroup;
   public loggingIn: boolean = false;
   public loginError: boolean = false;
   public errorMessage: string = 'An error occured. Please try again!';
+  public showPassword = false;
 
   constructor(
     private formBuilder: FormBuilder,

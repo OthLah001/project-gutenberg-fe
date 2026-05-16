@@ -1,28 +1,282 @@
-.book-analysis-wrapper {
-  padding: 4px;
-  border-radius: 4px;
-  background: linear-gradient(
-    84.96deg,
-    #0880ea -27.06%,
-    #8920fe 33.01%,
-    #e93d82 81.07%,
-    #e93dc3 100.15%,
-    #c62ab6 114.28%
-  );
+:host {
+  display: block;
+  font-family: 'Manrope', sans-serif;
+  color: #1b1c1c;
+}
 
-  .book-analysis {
-    padding: 1rem 2rem;
-    background: white;
+.book-analysis {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.book-analysis__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(196, 198, 204, 0.1);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.book-analysis__cover-wrap {
+  width: 100%;
+  max-width: 280px;
+  flex-shrink: 0;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #efeded;
+  @media (min-width: 768px) {
+    width: 33.333%;
+    max-width: 320px;
+  }
+}
+
+.book-analysis__cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-analysis__hero-copy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    text-align: left;
+  }
+}
+
+.book-analysis__title {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 700;
+  color: #05111e;
+
+  @media (min-width: 768px) {
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: -0.02em;
+  }
+}
+
+.book-analysis__meta,
+.book-analysis__summary,
+.book-analysis__relationship p,
+.book-analysis__character-role,
+.book-analysis__quote p {
+  color: #44474c;
+}
+
+.book-analysis__meta {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.book-analysis__intro {
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(196, 198, 204, 0.1);
+}
+
+.book-analysis__label {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #05111e;
+}
+
+.book-analysis__summary {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.book-analysis__grid {
+  display: grid;
+  gap: 16px;
+  padding: 32px 0;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+.book-analysis__card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(196, 198, 204, 0.1);
+
+  @media (min-width: 768px) {
+    &--relationships,
+    &--quotes {
+      grid-column: span 8;
+    }
+
+    &--sentiment,
+    &--themes {
+      grid-column: span 4;
+    }
   }
 
-  .analysis-title {
-    font-size: 22px;
-    font-weight: 700;
+  &--relationships {
+    background: #fff;
   }
 
-  .analysis-content {
+  &--sentiment {
+    background: #1a2634;
+    border-color: transparent;
+
+    .book-analysis__card-title {
+      color: #d7e3f7;
+    }
+  }
+
+  &--themes {
+    background: #eae8e7;
+  }
+
+  &--quotes {
+    background: #f5f3f3;
+  }
+}
+
+.book-analysis__card-title,
+.book-analysis__section-title {
+  margin: 0 0 24px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: #05111e;
+}
+
+.book-analysis__card-title {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.book-analysis__relationships {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.book-analysis__relationship {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+
+  .material-symbols-outlined {
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 20px;
+    color: #05111e;
+  }
+
+  p {
+    margin: 0;
     font-size: 16px;
-    font-weight: 400;
-    color: #00000099;
+    line-height: 24px;
   }
+}
+
+.book-analysis__sentiment-quote {
+  margin: auto 0 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-style: italic;
+  color: #818d9f;
+}
+
+.book-analysis__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.book-analysis__tag {
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: #05111e;
+  background: #fbf9f8;
+  border: 1px solid #c4c6cc;
+  border-radius: 999px;
+}
+
+.book-analysis__quotes {
+  display: grid;
+  gap: 24px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.book-analysis__quote {
+  margin: 0;
+  padding-left: 12px;
+  border-left: 4px solid #bf7c63;
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-style: italic;
+  }
+}
+
+.book-analysis__characters {
+  padding: 32px 0;
+  border-top: 1px solid rgba(196, 198, 204, 0.1);
+}
+
+.book-analysis__section-title {
+  margin-bottom: 32px;
+  font-size: 28px;
+  line-height: 36px;
+}
+
+.book-analysis__character-grid {
+  display: grid;
+  gap: 24px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.book-analysis__character {
+  padding: 8px 0;
+}
+
+.book-analysis__character-name {
+  margin: 0 0 4px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #05111e;
+}
+
+.book-analysis__character-role {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
 }
